@@ -1,0 +1,18 @@
+meta {
+  name: List Failures
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/indexing/tenants/{{tenantId}}/ingestions/{{jobId}}/failures?limit=20
+  body: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+}
+
+assert {
+  res.status: eq 200
+}

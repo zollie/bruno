@@ -1,0 +1,33 @@
+meta {
+  name: Logout URL
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/auth/logout
+  body: json
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "id_token": "{{idToken}}",
+    "post_logout_redirect_uri": "{{postLogoutRedirectUri}}",
+    "state": "{{logoutState}}"
+  }
+}
+
+assert {
+  res.status: eq 200
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.logout_url) {
+    bru.setVar("logoutUrl", body.logout_url);
+  }
+}

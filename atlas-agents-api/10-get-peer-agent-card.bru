@@ -1,0 +1,21 @@
+meta {
+  name: Get Peer Agent Card
+  type: http
+  seq: 10
+}
+
+get {
+  url: {{baseUrl}}/tenants/{{tenantId}}/a2a/agents/{{agentId}}/.well-known/agent-card.json
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  X-Atlas-A2A-Source-Agent-ID: {{sourceAgentId}}
+  X-Atlas-A2A-Agent-Authorization: Bearer {{sourceAgentToken}}
+}
+
+assert {
+  res.status: eq 200
+}

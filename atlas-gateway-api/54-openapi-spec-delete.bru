@@ -1,0 +1,18 @@
+meta {
+  name: OpenAPI Spec Delete
+  type: http
+  seq: 54
+}
+
+delete {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/admin/openapi/specs/{{openApiSpecId}}
+  body: none
+}
+
+headers {
+  Authorization: Bearer {{adminToken}}
+}
+
+assert {
+  res.status: eq 204
+}

@@ -1,0 +1,24 @@
+meta {
+  name: Lookup Tenants
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/auth/lookup-tenants
+  body: json
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "email": "{{lookupEmail}}"
+  }
+}
+
+assert {
+  res.status: eq 200
+}

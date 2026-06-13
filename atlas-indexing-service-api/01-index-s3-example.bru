@@ -1,0 +1,36 @@
+meta {
+  name: Index S3 Example
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/v1/index
+  body: json
+}
+
+headers {
+  Content-Type: application/json
+  X-API-Key: {{apiKey}}
+}
+
+body:json {
+  {
+    "tenant_id": "testcatalog1",
+    "input": {
+      "type": "s3",
+      "bucket": "avdx-data-sandbox-blue-us-east-1",
+      "key": "data/vertical=pay/tenant=testcatalog1/step=raw/date=2026-05-19/1779213859107580325-47afbe64-useStructurePersistence.txt",
+      "source_filename": "1779213859107580325-47afbe64-useStructurePersistence.txt",
+      "content_type": "text/plain",
+      "labels": {
+        "doctype": "contract",
+        "jurisdiction": "us"
+      }
+    }
+  }
+}
+
+assert {
+  res.status: eq 200
+}

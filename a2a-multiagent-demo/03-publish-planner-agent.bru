@@ -1,0 +1,32 @@
+meta {
+  name: Publish Planner Agent
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{registryBaseUrl}}/agents
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "cardUrl": "{{plannerCardUrl}}"
+  }
+}
+
+assert {
+  res.status: eq 201
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.agentId) {
+    bru.setVar("plannerAgentRegistryId", body.agentId);
+  }
+}

@@ -1,0 +1,21 @@
+meta {
+  name: Policies Get Tenant
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{baseUrl}}/authz/tenants/{{tenantId}}/policies
+  body: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+}
+
+tests {
+  test("status is 200 or 404", function() {
+    const status = typeof res.getStatus === "function" ? res.getStatus() : res.status;
+    expect([200, 404]).to.include(status);
+  });
+}

@@ -1,0 +1,40 @@
+meta {
+  name: Tool Update
+  type: http
+  seq: 23
+}
+
+put {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/tools/{{toolId}}
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{adminToken}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "{{toolName}}",
+    "display_name": "Sample Tool Updated",
+    "description": "Updated sample tool",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string"
+        },
+        "limit": {
+          "type": "integer"
+        }
+      }
+    },
+    "enabled": true
+  }
+}
+
+assert {
+  res.status: eq 200
+}

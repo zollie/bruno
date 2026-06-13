@@ -1,0 +1,26 @@
+meta {
+  name: Delete All Flows
+  type: http
+  seq: 16
+}
+
+delete {
+  url: {{baseUrl}}/flows/tenants/{{tenantId}}/flows
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("response includes deletedCount", function() {
+    const body = res.getBody();
+    expect(body).to.have.property("deletedCount");
+  });
+}

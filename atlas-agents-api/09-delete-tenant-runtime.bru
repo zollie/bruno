@@ -1,0 +1,19 @@
+meta {
+  name: Delete Tenant Runtime
+  type: http
+  seq: 9
+}
+
+delete {
+  url: {{baseUrl}}/agents/tenants/{{tenantId}}/runtime
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+}
+
+assert {
+  res.status: eq 200
+}

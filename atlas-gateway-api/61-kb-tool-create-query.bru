@@ -1,0 +1,72 @@
+meta {
+  name: KB Tool Create Query
+  type: http
+  seq: 61
+}
+
+post {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/tools
+  body: json
+}
+
+headers {
+  Authorization: Bearer {{adminToken}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "knowledge_query",
+    "display_name": "Knowledge Query",
+    "description": "Query GraphRAG knowledge base and return answer plus source nodes.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "tenant_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Tenant identifier. Required."
+        },
+        "query": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Natural-language question to run through GraphRAG retrieval/query."
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["traversal", "semantic"],
+          "default": "traversal",
+          "description": "Retrieval mode."
+        },
+        "context_format": {
+          "type": "string",
+          "default": "text",
+          "description": "Context formatting mode passed to retrieval service."
+        },
+        "retriever_kwargs": {
+          "type": "object",
+          "default": {},
+          "additionalProperties": true,
+          "description": "Optional retrieval tuning parameters."
+        }
+      },
+      "required": ["tenant_id", "query"],
+      "additionalProperties": false
+    },
+    "enabled": true
+  }
+}
+
+assert {
+  res.status: eq 201
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.id) {
+    bru.setVar("kbQueryToolId", body.id);
+  }
+  if (body && body.name) {
+    bru.setVar("kbQueryToolName", body.name);
+  }
+}

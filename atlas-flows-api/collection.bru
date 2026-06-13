@@ -1,0 +1,18 @@
+docs {
+  # Atlas Flows API
+
+  This collection targets the Atlas `/flows` module.
+
+  Notes:
+  - Data routes require `tenantId` in URL path: `/flows/tenants/{{tenantId}}/flows...`.
+  - Tenant is authorized by strict path-vs-JWT match (`tenantId` path must equal JWT `tenant_id`).
+  - Vertical is derived from JWT `vertical` (required for create).
+  - Keep `environments/Local.bru` values in sync: `token` must contain the same tenant as `tenantId`.
+  - Create generates `flowId`/`id` server-side.
+  - Create accepts source-type payloads only (`sourceType: "gdrive"` + `source` object).
+  - `02-create-flow` stores returned `flowId` into variable `flowId`.
+  - Both execution routes are included: `05-trigger-flow` (`:trigger`) and `06-execute-flow` (`/executions`).
+  - Cleanup route is included: `07-delete-flow` (`DELETE /flows/tenants/{{tenantId}}/flows/{{flowId}}`).
+  - Bulk cleanup route is included: `14-delete-all-flows` (`DELETE /flows/tenants/{{tenantId}}/flows`).
+  - Context-catalog direct upload route is included: `13-upload-to-s3` (`POST /flows/tenants/{{tenantId}}/uploads`, multipart field `file`).
+}

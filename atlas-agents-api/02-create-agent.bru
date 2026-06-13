@@ -1,0 +1,44 @@
+meta {
+  name: Create Agent
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/agents/tenants/{{tenantId}}/
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "Support Agent",
+    "description": "Helps users resolve product questions.",
+    "prompt": "Help users resolve product questions.",
+    "tools": ["sample_tool"],
+    "skills": [
+      {
+        "id": "support_questions",
+        "name": "Support Questions",
+        "description": "Answer support questions and route issues.",
+        "tags": ["support"]
+      }
+    ]
+  }
+}
+
+assert {
+  res.status: eq 201
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.id) {
+    bru.setVar("agentId", body.id);
+  }
+}

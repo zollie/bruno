@@ -1,0 +1,32 @@
+meta {
+  name: Create Ingestion
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/indexing/tenants/{{tenantId}}/ingestions
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+  }
+}
+
+assert {
+  res.status: eq 201
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.jobId) {
+    bru.setVar("jobId", body.jobId);
+  }
+}

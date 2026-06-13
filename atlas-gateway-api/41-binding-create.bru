@@ -1,0 +1,36 @@
+meta {
+  name: Binding Create
+  type: http
+  seq: 41
+}
+
+post {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/admin/bindings
+  body: json
+}
+
+headers {
+  Authorization: Bearer {{adminToken}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "tool_name": "{{toolName}}",
+    "target_id": "{{targetId}}",
+    "downstream_tool": "{{toolName}}",
+    "openapi_spec_id": "",
+    "operation_id": ""
+  }
+}
+
+assert {
+  res.status: eq 201
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.id) {
+    bru.setVar("bindingId", body.id);
+  }
+}

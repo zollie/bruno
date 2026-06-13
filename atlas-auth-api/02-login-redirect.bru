@@ -1,0 +1,14 @@
+meta {
+  name: Login Redirect
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/auth/login?redirect_uri={{redirectUriEncoded}}&code_challenge={{codeChallenge}}&code_challenge_method=S256&state={{state}}
+  body: none
+}
+
+assert {
+  res.status: eq 302
+}

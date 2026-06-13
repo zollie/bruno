@@ -1,0 +1,26 @@
+vars {
+  baseUrl: http://localhost:8080
+  userToken: replace-with-valid-user-jwt
+  adminToken: replace-with-valid-admin-jwt
+  tenantId: tenant-a
+  toolId: replace-after-tool-create
+  toolName: sample_tool
+  targetName: sample-mcp-target
+  targetBaseUrl: replace-with-mcp-target-base-url
+  targetMcpPath: /mcp
+  targetId: replace-after-target-create
+  bindingId: replace-after-binding-create
+  openApiName: sample-openapi
+  openApiSpecId: replace-after-openapi-import
+  operationId: replace-after-openapi-import
+  kbQueryToolId: replace-after-kb-query-tool-create
+  kbMemoryToolId: replace-after-kb-memory-tool-create
+  kbQueryToolName: knowledge_query
+  kbMemoryToolName: knowledge_memory
+  kbKnowledgeToolName: knowledge_base
+}
+
+vars:secret [
+  userToken
+  adminToken
+]

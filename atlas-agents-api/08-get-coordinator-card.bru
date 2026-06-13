@@ -1,0 +1,19 @@
+meta {
+  name: Get Coordinator Card
+  type: http
+  seq: 8
+}
+
+get {
+  url: {{baseUrl}}/tenants/{{tenantId}}/a2a/.well-known/agent-card.json
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+}
+
+assert {
+  res.status: eq 200
+}

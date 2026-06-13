@@ -1,0 +1,33 @@
+meta {
+  name: Trigger Flow
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/flows/tenants/{{tenantId}}/flows/{{flowId}}:trigger
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+}
+
+assert {
+  res.status: eq 201
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.executionId) {
+    bru.setVar("executionId", body.executionId);
+  }
+}
+
+tests {
+  test("response contains executionId", function() {
+    const body = res.getBody();
+    expect(body.executionId).to.not.equal(null);
+  });
+}

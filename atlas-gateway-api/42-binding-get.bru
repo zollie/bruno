@@ -1,0 +1,18 @@
+meta {
+  name: Binding Get
+  type: http
+  seq: 42
+}
+
+get {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/admin/bindings/{{bindingId}}
+  body: none
+}
+
+headers {
+  Authorization: Bearer {{adminToken}}
+}
+
+assert {
+  res.status: eq 200
+}

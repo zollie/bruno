@@ -1,0 +1,38 @@
+meta {
+  name: Get Coordinator Task
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{coordinatorAgentBaseUrl}}/invoke
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "jsonrpc": "2.0",
+    "id": "multi-agent-{{workflowRunId}}-coordinator-get",
+    "method": "tasks/get",
+    "params": {
+      "id": "{{coordinatorTaskId}}"
+    }
+  }
+}
+
+assert {
+  res.status: eq 200
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.result && body.result.status && body.result.status.state) {
+    bru.setVar("coordinatorTaskState", body.result.status.state);
+    console.log(`Coordinator task state: ${body.result.status.state}`);
+  }
+}

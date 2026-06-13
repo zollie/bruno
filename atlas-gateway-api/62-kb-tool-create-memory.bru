@@ -1,0 +1,71 @@
+meta {
+  name: KB Tool Create Memory
+  type: http
+  seq: 62
+}
+
+post {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/tools
+  body: json
+}
+
+headers {
+  Authorization: Bearer {{adminToken}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "knowledge_memory",
+    "display_name": "Knowledge Memory",
+    "description": "Index text content into GraphRAG memory.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "tenant_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Tenant identifier. Required."
+        },
+        "content": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Text content to index as memory."
+        },
+        "format": {
+          "type": "string",
+          "enum": ["plain", "markdown"],
+          "default": "plain",
+          "description": "Content format."
+        },
+        "source_id": {
+          "type": "string",
+          "description": "Optional source identifier."
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {"type": "string"},
+          "default": {},
+          "description": "Optional string labels attached to indexed memory."
+        }
+      },
+      "required": ["tenant_id", "content"],
+      "additionalProperties": false
+    },
+    "enabled": true
+  }
+}
+
+assert {
+  res.status: eq 201
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.id) {
+    bru.setVar("kbMemoryToolId", body.id);
+  }
+  if (body && body.name) {
+    bru.setVar("kbMemoryToolName", body.name);
+  }
+}

@@ -1,0 +1,41 @@
+meta {
+  name: Create Math Agent
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/agents/tenants/{{tenantId}}/
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Authorization: Bearer {{token}}
+}
+
+body:json {
+  {
+    "name": "Math Agent",
+    "description": "Deterministic math solver with strict structured output",
+    "prompt": "Solve numeric and symbolic math tasks and return strict JSON.",
+    "tools": [],
+    "skills": [
+      {
+        "id": "math_solve",
+        "name": "Math Solver",
+        "description": "Solve numeric and symbolic math tasks and return strict JSON.",
+        "tags": ["math", "reasoning"],
+        "examples": [
+          "Solve: 2x + 3 = 11",
+          "Differentiate f(x)=x^2+3x-2"
+        ]
+      }
+    ]
+  }
+}
+
+assert {
+  res.status: eq 201
+}

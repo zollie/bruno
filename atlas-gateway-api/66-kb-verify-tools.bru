@@ -1,0 +1,18 @@
+meta {
+  name: KB Verify Tools
+  type: http
+  seq: 66
+}
+
+get {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/tools
+  body: none
+}
+
+headers {
+  Authorization: Bearer {{adminToken}}
+}
+
+assert {
+  res.status: eq 200
+}

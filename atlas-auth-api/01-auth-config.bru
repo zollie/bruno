@@ -1,0 +1,22 @@
+meta {
+  name: Auth Config
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/auth/config
+  body: none
+}
+
+assert {
+  res.status: eq 200
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.oidc) {
+    bru.setVar("oidcClientId", body.oidc.clientId);
+    bru.setVar("oidcScope", body.oidc.scope);
+  }
+}

@@ -1,0 +1,13 @@
+docs {
+  # A2A Math Agent Demo (Bruno)
+
+  Single-agent flow for testing Atlas Backend coordinator routing:
+  - Health check
+  - Create math agent via POST /agents/tenants/{tenantId}
+  - List and verify agents for that tenant
+  - Invoke math through the tenant coordinator via POST /tenants/{tenantId}/a2a/invoke
+
+  JWT usage:
+  - same `token` is used for Atlas agent requests
+  - tenant is provided by the explicit request path
+}

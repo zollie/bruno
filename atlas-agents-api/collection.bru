@@ -1,0 +1,11 @@
+docs {
+  # Atlas Agents API
+
+  This collection targets the Atlas `/agents` module.
+
+  Notes:
+  - Data routes use `Authorization: Bearer {{token}}`.
+  - Data routes include the active tenant in the path.
+  - `02-create-agent` stores returned `id` into `agentId`.
+  - Update uses full replacement shape: `name`, `description`, `prompt`, `tools`, and `skills`.
+}

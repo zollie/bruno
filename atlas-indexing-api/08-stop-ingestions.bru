@@ -1,0 +1,25 @@
+meta {
+  name: Stop Ingestions
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{baseUrl}}/indexing/tenants/{{tenantId}}/ingestions/stop
+  body: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+}
+
+assert {
+  res.status: eq 202
+}
+
+tests {
+  test("response includes stoppedCount", function() {
+    const body = res.getBody();
+    expect(body).to.have.property("stoppedCount");
+  });
+}

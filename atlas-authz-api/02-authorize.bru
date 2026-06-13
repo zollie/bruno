@@ -1,0 +1,56 @@
+meta {
+  name: Authorize
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/authz/tenants/{{tenantId}}/authorize
+  body: json
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  X-Tenant-ID: {{tenantId}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "jwtClaims": {
+      "sub": "{{userId}}",
+      "tenant_id": "{{tenantId}}",
+      "tenants": ["{{tenantId}}"]
+    },
+    "action": {
+      "name": "tool.call",
+      "input": {
+        "name": "{{toolName}}",
+        "arguments": {}
+      }
+    },
+    "resource": {
+      "id": "atlas-gateway",
+      "type": "Atlas::Gateway",
+      "attrs": {
+        "tenant_id": "{{tenantId}}"
+      }
+    },
+    "context": {}
+  }
+}
+
+tests {
+  test("status is 200 or 404", function() {
+    const status = typeof res.getStatus === "function" ? res.getStatus() : res.status;
+    expect([200, 404]).to.include(status);
+  });
+
+  test("allow=true when policy bundle exists", function() {
+    const status = typeof res.getStatus === "function" ? res.getStatus() : res.status;
+    if (status === 200) {
+      const body = res.getBody();
+      expect(body.allow).to.equal(true);
+    }
+  });
+}

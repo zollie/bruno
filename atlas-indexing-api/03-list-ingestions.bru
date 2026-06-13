@@ -1,0 +1,23 @@
+meta {
+  name: List Ingestions
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/indexing/tenants/{{tenantId}}/ingestions
+  body: none
+  auth: none
+}
+
+params:query {
+  : c2 w3rewa
+}
+
+headers {
+  Authorization: Bearer {{token}}
+}
+
+assert {
+  res.status: eq 200
+}

@@ -1,0 +1,24 @@
+meta {
+  name: Onboard Tenant Runtime
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/agents/tenants/{{tenantId}}/runtime
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {}
+}
+
+assert {
+  res.status: eq 200
+}

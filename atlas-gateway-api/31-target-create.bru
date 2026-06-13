@@ -1,0 +1,43 @@
+meta {
+  name: Target Create
+  type: http
+  seq: 31
+}
+
+post {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/admin/targets
+  body: json
+}
+
+headers {
+  Authorization: Bearer {{adminToken}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "{{targetName}}",
+    "type": "mcp",
+    "base_url": "{{targetBaseUrl}}",
+    "mcp_path": "{{targetMcpPath}}",
+    "default_headers": "",
+    "token_mode": "pass_through",
+    "token_client_id": "",
+    "token_client_secret": "",
+    "token_audience": "",
+    "token_scope": "",
+    "token_realm": "",
+    "discovery_enabled": true
+  }
+}
+
+assert {
+  res.status: eq 201
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.id) {
+    bru.setVar("targetId", body.id);
+  }
+}

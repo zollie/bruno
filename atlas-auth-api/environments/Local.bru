@@ -1,0 +1,28 @@
+vars {
+  baseUrl: http://localhost:8080
+  token: replace-with-jwt
+  idToken: replace-after-login
+  refreshToken: replace-after-login
+  tenantId: replace-with-tenant-id
+  tenantName: Tenant A
+  lookupEmail: user@example.test
+  redirectUri: http://localhost:8080/auth/callback
+  redirectUriEncoded: http%3A%2F%2Flocalhost%3A8080%2Fauth%2Fcallback
+  state: test-state
+  code: replace-after-browser-login
+  codeVerifier: bruno-pkce-code-verifier-1234567890
+  codeChallenge: fNCfH_tuFoKNrxTD94tXY1RiBALW0Ue2RWp-WKzmulA
+  clientCredentialsClientId: replace-with-service-client-id
+  clientCredentialsClientSecret: replace-with-service-client-secret
+  clientCredentialsScope: openid profile email
+  clientCredentialsAudience: atlas-backend
+  postLogoutRedirectUri: http://localhost:8080/auth/logout-complete
+  logoutState: logout-state
+}
+
+vars:secret [
+  token
+  idToken
+  refreshToken
+  clientCredentialsClientSecret
+]

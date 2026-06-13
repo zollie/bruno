@@ -1,0 +1,21 @@
+meta {
+  name: Policies Delete Tenant
+  type: http
+  seq: 8
+}
+
+delete {
+  url: {{baseUrl}}/authz/tenants/{{tenantId}}/policies
+  body: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+}
+
+tests {
+  test("status is 204 or 404", function() {
+    const status = typeof res.getStatus === "function" ? res.getStatus() : res.status;
+    expect([204, 404]).to.include(status);
+  });
+}

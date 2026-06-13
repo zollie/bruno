@@ -1,0 +1,51 @@
+meta {
+  name: Invoke Through Coordinator
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/tenants/{{tenantId}}/a2a/invoke
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Authorization: Bearer {{token}}
+}
+
+script:pre-request {
+  const tenantId = bru.getEnvVar("tenantId");
+  if (!tenantId) {
+    throw new Error("tenantId environment variable is required");
+  }
+}
+
+body:json {
+  {
+    "jsonrpc": "2.0",
+    "id": "math-agent-demo-coordinator-send",
+    "method": "message/send",
+    "params": {
+      "configuration": {
+        "blocking": true,
+        "acceptedOutputModes": ["text"]
+      },
+      "message": {
+        "messageId": "math-agent-demo-coordinator-message-1",
+        "role": "user",
+        "parts": [
+          {
+            "kind": "text",
+            "text": "Ask the Math Agent to solve 2x + 3 = 11. Return strict JSON with answer and steps."
+          }
+        ]
+      }
+    }
+  }
+}
+
+assert {
+  res.status: eq 200
+}

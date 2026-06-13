@@ -1,0 +1,47 @@
+meta {
+  name: Tool Create
+  type: http
+  seq: 21
+}
+
+post {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/tools
+  body: json
+}
+
+headers {
+  Authorization: Bearer {{adminToken}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "sample_tool",
+    "display_name": "Sample Tool",
+    "description": "Sample tool for gateway API testing",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string"
+        }
+      },
+      "required": ["q"]
+    },
+    "enabled": true
+  }
+}
+
+assert {
+  res.status: eq 201
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.id) {
+    bru.setVar("toolId", body.id);
+  }
+  if (body && body.name) {
+    bru.setVar("toolName", body.name);
+  }
+}

@@ -1,0 +1,46 @@
+meta {
+  name: Invoke Peer Agent
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{baseUrl}}/tenants/{{tenantId}}/a2a/agents/{{agentId}}/invoke
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Authorization: Bearer {{token}}
+  X-Atlas-A2A-Source-Agent-ID: {{sourceAgentId}}
+  X-Atlas-A2A-Agent-Authorization: Bearer {{sourceAgentToken}}
+}
+
+body:json {
+  {
+    "jsonrpc": "2.0",
+    "id": "atlas-agents-peer-send",
+    "method": "message/send",
+    "params": {
+      "configuration": {
+        "blocking": true,
+        "acceptedOutputModes": ["text"]
+      },
+      "message": {
+        "messageId": "atlas-agents-peer-message-1",
+        "role": "user",
+        "parts": [
+          {
+            "kind": "text",
+            "text": "Return a short confirmation that the peer agent invocation succeeded."
+          }
+        ]
+      }
+    }
+  }
+}
+
+assert {
+  res.status: eq 200
+}

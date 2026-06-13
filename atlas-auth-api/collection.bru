@@ -1,0 +1,17 @@
+docs {
+  # Atlas Auth API
+
+  Supported Atlas auth and tenant-onboarding calls.
+
+  Notes:
+  - `01-auth-config` returns the OIDC endpoints and configured organization.
+  - `02-login-redirect` starts Authorization Code + PKCE and should return a 302 to Keycloak.
+  - `03-exchange-code` exchanges the OIDC authorization code for Atlas JWTs.
+  - `04-refresh-token` refreshes the Atlas token from a refresh token.
+  - `05-logout-url` builds the OIDC logout URL.
+  - `06-client-credentials-token` exercises the machine-to-machine flow.
+  - `07-lookup-tenants` discovers tenant memberships for login.
+  - `08-onboard-tenant` explicitly onboards a tenant through `/auth/api/tenants/onboard`.
+  - `09-create-admin-user` creates or links an Atlas admin through `/auth/api/users`; the bearer token must already have `atlas_admin`.
+  - Token-producing requests store `token`, `idToken`, and `refreshToken` as Bruno runtime variables when present.
+}

@@ -1,0 +1,13 @@
+docs {
+  # Atlas Gateway API
+
+  This collection targets the Atlas `/gateway` module.
+  Customer-facing Gateway APIs are tenant-scoped under `/gateway/tenants/{{tenantId}}`.
+
+  Notes:
+  - MCP runtime endpoints use `userToken`.
+  - Tool CRUD and admin endpoints use `adminToken` and require `gateway_admin` role by default.
+  - JWT must be a valid RS256 token accepted by gateway auth config.
+  - IDs are captured from create/import responses into env vars.
+  - Runtime authorization receives `tools/call` arguments, so examples include concrete arguments.
+}

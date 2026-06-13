@@ -1,0 +1,19 @@
+meta {
+  name: List Agents
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/agents/tenants/{{tenantId}}/
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+}
+
+assert {
+  res.status: eq 200
+}

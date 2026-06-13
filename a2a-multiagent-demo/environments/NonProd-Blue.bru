@@ -1,0 +1,22 @@
+vars {
+  registryBaseUrl: https://api-blue.us-east-1.nonprod.avidaws.com
+  token: replace-with-jwt
+  coordinatorAgentBaseUrl: https://api-blue.us-east-1.nonprod.avidaws.com
+  plannerAgentBaseUrl: https://api-blue.us-east-1.nonprod.avidaws.com
+  validatorAgentBaseUrl: https://api-blue.us-east-1.nonprod.avidaws.com
+  workflowRunId: run-2026-06-02-a
+  workflowObjective: Run a deterministic triage workflow for issue ACME-123 and return strict JSON payloads
+  coordinatorCardUrl: https://api-blue.us-east-1.nonprod.avidaws.com/.well-known/agent-card.json
+  plannerCardUrl: https://api-blue.us-east-1.nonprod.avidaws.com/.well-known/agent-card.json
+  validatorCardUrl: https://api-blue.us-east-1.nonprod.avidaws.com/.well-known/agent-card.json
+  coordinatorAgentRegistryId: replace-after-publish
+  plannerAgentRegistryId: replace-after-publish
+  validatorAgentRegistryId: replace-after-publish
+  coordinatorTaskId: replace-after-invoke
+  plannerTaskId: replace-after-invoke
+  validatorTaskId: replace-after-invoke
+}
+
+vars:secret [
+  token
+]

@@ -1,0 +1,14 @@
+docs {
+  # Atlas Authz API
+
+  This collection targets the Atlas `/authz` module.
+
+  Notes:
+  - `POST /authz/tenants/{tenantId}/authorize` expects the Atlas adapter payload: `jwtClaims`, structured `action`, `resource`, and `context`.
+  - `PUT/GET/DELETE /authz/tenants/{tenantId}/policies` manages tenant policy bundles.
+  - If `AUTHZ_REQUIRE_JWT=true` (default), `token` must be a valid RS256 JWT.
+  - If JWT auth is enabled, policy management endpoints require `isAdmin=true` claim in the caller token.
+  - If no policy bundle exists for the tenant, `POST /authz/tenants/{tenantId}/authorize` may return `404`.
+  - Request `05` installs same-tenant MCP/A2A runtime policies plus the admin-only gateway tool-create demo policy.
+  - Requests `09` and `10` verify same-tenant allow and cross-tenant deny for `agent.invoke`.
+}

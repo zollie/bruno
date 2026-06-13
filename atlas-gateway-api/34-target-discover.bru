@@ -1,0 +1,18 @@
+meta {
+  name: Target Discover
+  type: http
+  seq: 34
+}
+
+post {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/admin/targets/{{targetId}}/discover
+  body: none
+}
+
+headers {
+  Authorization: Bearer {{adminToken}}
+}
+
+assert {
+  res.status: eq 200
+}

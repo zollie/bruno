@@ -1,0 +1,18 @@
+meta {
+  name: Tools List
+  type: http
+  seq: 20
+}
+
+get {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/tools
+  body: none
+}
+
+headers {
+  Authorization: Bearer {{adminToken}}
+}
+
+assert {
+  res.status: eq 200
+}

@@ -1,0 +1,32 @@
+meta {
+  name: Publish Validator Agent
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{registryBaseUrl}}/agents
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "cardUrl": "{{validatorCardUrl}}"
+  }
+}
+
+assert {
+  res.status: eq 201
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.agentId) {
+    bru.setVar("validatorAgentRegistryId", body.agentId);
+  }
+}

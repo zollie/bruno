@@ -1,0 +1,43 @@
+meta {
+  name: Create Admin User
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{baseUrl}}/auth/api/users
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "email": "admin-a@example.test",
+    "firstName": "Admin",
+    "lastName": "A",
+    "displayName": "Admin A",
+    "org": "org-a",
+    "tenants": ["*"],
+    "roles": ["atlas_admin"],
+    "departments": ["platform"],
+    "identityMode": "link_existing",
+    "enabled": true,
+    "emailVerified": true
+  }
+}
+
+assert {
+  res.status: eq 201
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.userId) {
+    bru.setVar("adminUserId", body.userId);
+  }
+}

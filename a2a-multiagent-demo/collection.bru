@@ -1,0 +1,24 @@
+docs {
+  # A2A Multi-Agent Demo (Bruno)
+
+  This collection validates a 3-agent A2A flow:
+  - Register coordinator/planner/validator agents in a2a-registry using `cardUrl`
+  - Verify discovery via `/.well-known/agents/index.json`
+  - Invoke `/invoke` on each agent endpoint and track task ids
+
+  Endpoint target assumptions:
+  - registry uses `POST /agents` (authenticated listing/index still uses token auth in this repo)
+  - agents expose A2A JSON-RPC at `<agentBaseUrl>/invoke`
+  - run steps should be executed in numeric order
+
+  Suggested run order:
+  1. Registry Health
+  2. Publish Coordinator Agent
+  3. Publish Planner Agent
+  4. Publish Validator Agent
+  5. Registry List Agents
+  6. Registry Discovery Index
+  7. Invoke Coordinator + Poll
+  8. Invoke Planner + Poll
+  9. Invoke Validator + Poll
+}

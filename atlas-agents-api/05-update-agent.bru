@@ -1,0 +1,37 @@
+meta {
+  name: Update Agent
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{baseUrl}}/agents/tenants/{{tenantId}}/{{agentId}}
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "Support Agent V2",
+    "description": "Handles support and escalation workflows.",
+    "prompt": "Handle support and escalation workflows.",
+    "tools": ["sample_tool", "knowledge_query"],
+    "skills": [
+      {
+        "id": "support_escalation",
+        "name": "Support Escalation",
+        "description": "Handle support and escalation workflows.",
+        "tags": ["support", "escalation"]
+      }
+    ]
+  }
+}
+
+assert {
+  res.status: eq 200
+}

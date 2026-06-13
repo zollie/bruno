@@ -1,0 +1,54 @@
+meta {
+  name: OpenAPI Import
+  type: http
+  seq: 50
+}
+
+post {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/admin/openapi/import
+  body: json
+}
+
+headers {
+  Authorization: Bearer {{adminToken}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "{{openApiName}}",
+    "spec": {
+      "openapi": "3.0.3",
+      "info": {
+        "title": "Sample Gateway API",
+        "version": "1.0.0"
+      },
+      "paths": {
+        "/sample": {
+          "post": {
+            "operationId": "sampleCreate",
+            "responses": {
+              "200": {
+                "description": "ok"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+assert {
+  res.status: eq 201
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.spec && body.spec.id) {
+    bru.setVar("openApiSpecId", body.spec.id);
+  }
+  if (body && Array.isArray(body.operations) && body.operations.length > 0 && body.operations[0].operation_id) {
+    bru.setVar("operationId", body.operations[0].operation_id);
+  }
+}

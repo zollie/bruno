@@ -1,0 +1,32 @@
+meta {
+  name: Policies Upsert Tenant
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{baseUrl}}/authz/tenants/{{tenantId}}/policies
+  body: json
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "namespace": "Atlas",
+    "principal_type": "Atlas::OAuthUser",
+    "resource_type": "Atlas::Gateway",
+    "action_type": "Atlas::Action",
+    "policies": "permit (principal, action == Atlas::Action::\"tool.list\", resource) when { principal.tenant_id == resource.tenant_id }; permit (principal, action == Atlas::Action::\"tool.call\", resource) when { principal.tenant_id == resource.tenant_id }; permit (principal, action == Atlas::Action::\"agent.card.read\", resource) when { principal.tenant_id == resource.tenant_id }; permit (principal, action == Atlas::Action::\"agent.invoke\", resource) when { principal.tenant_id == resource.tenant_id }; permit (principal, action == Atlas::Action::\"tool.create\", resource) when { principal has isAdmin && principal.isAdmin == true };",
+    "base_entities": []
+  }
+}
+
+tests {
+  test("status is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+}

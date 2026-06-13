@@ -1,0 +1,28 @@
+vars {
+  token: eyJhbGciOiJSUzI1NiIsImtpZCI6ImF0bGFzLXJzMjU2LXNoYXJlZC1ibHVlLTEiLCJ0eXAiOiJKV1QifQ.eyJhdGxhc191c2VyX2lkIjoiMDM5MzBlYzAtYWQxNy00ZmQxLThhYWQtMjE3YmFhNDZmOWJkIiwiYXVkIjoiYXRsYXMtYmFja2VuZCIsImRlcGFydG1lbnRzIjpbInBsYXRmb3JtcyJdLCJlbWFpbCI6Imt6b2xsaWNvZmZlckBhdmlkeGNoYW5nZS5jb20iLCJleHAiOjE3ODEyMTIyMjksImZhbWlseV9uYW1lIjoiWm9sbGljb2ZmZXIiLCJnaXZlbl9uYW1lIjoiS2V2aW4iLCJpYXQiOjE3ODExMjU4MjksImlzcyI6Imh0dHBzOi8vbWFuYWdlbWVudC1ibHVlLnVzLWVhc3QtMS5zYW5kYm94LmF2aWRhd3MuY29tL2F1dGgiLCJrZXljbG9ha19zdWIiOiI0ZDYzYzE3Yi02ZmM0LTQ5ODAtOWU0Zi0wYTdmOWIwYzA5YTEiLCJuYW1lIjoiS2V2aW4gWiIsIm5iZiI6MTc4MTEyNTgyOSwib3JnIjoiYXBleCIsInByZWZlcnJlZF91c2VybmFtZSI6Imt6b2xsaWNvZmZlckBhdmlkeGNoYW5nZS5jb20iLCJwcmluY2lwYWxfdHlwZSI6InVzZXIiLCJyb2xlcyI6WyJhdGxhc19hZG1pbiJdLCJzdWIiOiIwMzkzMGVjMC1hZDE3LTRmZDEtOGFhZC0yMTdiYWE0NmY5YmQiLCJ0ZW5hbnRzIjpbIioiXSwidG9rZW5fdHlwZSI6ImF0bGFzX2NvbnRleHQifQ.OJfaQHYcbIn3eF06tAK1DcEPzwjeYhxYlJXSicMicLdiOehjF6qEMtrNQhB-Vptm0TUTk7n15GTFbRHNf0Dwv36Gu6QMyFObNP98B8ve4BPZQIQaPMBwnsTH28W7GMOFKFrSQ1UFq5YikgaAJYJB4H_if0cjvfB-sZqsGC_wBQewluKEnD7mYjUCjn4kuIopUeq82MpvooVwzll8oXXUCx5v9CLOYL_PmCj9ml8d4t7gw-8KfFWZLk_lhre5FNSw-ehMU5Bu6jrtPydIkjhHeqq17cJHnHYlTy8VYgZwsLfhMqJV7UJSl2rUwEYGqOF0Sgntq2KKbLY1STuKmN3t0g
+  baseUrl: https://api-blue.us-east-1.sandbox.avidaws.com
+  idToken: replace-after-login
+  refreshToken: replace-after-login
+  tenantId: apex
+  tenantName: Apex
+  lookupEmail: user@example.test
+  redirectUri: https://management-blue.us-east-1.sandbox.avidaws.com/auth/callback
+  redirectUriEncoded: https%3A%2F%2Fmanagement-blue.us-east-1.sandbox.avidaws.com%2Fauth%2Fcallback
+  state: test-state
+  code: replace-after-browser-login
+  codeVerifier: bruno-pkce-code-verifier-1234567890
+  codeChallenge: fNCfH_tuFoKNrxTD94tXY1RiBALW0Ue2RWp-WKzmulA
+  clientCredentialsClientId: replace-with-service-client-id
+  clientCredentialsClientSecret: replace-with-service-client-secret
+  clientCredentialsScope: openid profile email
+  clientCredentialsAudience: atlas-backend
+  postLogoutRedirectUri: https://management-blue.us-east-1.sandbox.avidaws.com/auth/logout-complete
+  logoutState: logout-state
+}
+
+vars:secret [
+  token
+  idToken
+  refreshToken
+  clientCredentialsClientSecret
+]

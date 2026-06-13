@@ -1,0 +1,28 @@
+meta {
+  name: Runtime MCP Tools List
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/mcp
+  body: json
+}
+
+headers {
+  Authorization: Bearer {{userToken}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "jsonrpc": "2.0",
+    "id": "tools-list-1",
+    "method": "tools/list",
+    "params": {}
+  }
+}
+
+assert {
+  res.status: eq 200
+}

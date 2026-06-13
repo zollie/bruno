@@ -1,0 +1,29 @@
+meta {
+  name: List Flow Executions
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/flows/tenants/{{tenantId}}/flows/{{flowId}}/executions?limit=100
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+}
+
+assert {
+  res.status: eq 200
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.data && body.data.length > 0) {
+    const exec = body.data[0];
+    if (exec && exec.id) {
+      bru.setVar("executionId", exec.id);
+    }
+  }
+}

@@ -1,0 +1,18 @@
+meta {
+  name: Target Delete
+  type: http
+  seq: 35
+}
+
+delete {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/admin/targets/{{targetId}}
+  body: none
+}
+
+headers {
+  Authorization: Bearer {{adminToken}}
+}
+
+assert {
+  res.status: eq 204
+}

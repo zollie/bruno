@@ -1,0 +1,53 @@
+meta {
+  name: Invoke Validator Agent
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{validatorAgentBaseUrl}}/invoke
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "jsonrpc": "2.0",
+    "id": "multi-agent-{{workflowRunId}}-validator-send",
+    "method": "message/send",
+    "params": {
+      "configuration": {
+        "blocking": false,
+        "acceptedOutputModes": ["text"]
+      },
+      "message": {
+        "messageId": "{{workflowRunId}}-validator-msg-1",
+        "role": "user",
+        "parts": [
+          {
+            "kind": "text",
+            "text": "You are a deterministic validator. Objective: {{workflowObjective}}. Respond with strict JSON only. Schema keys: agent, runId, validationResult, riskLevel, nextAction."
+          }
+        ]
+      }
+    }
+  }
+}
+
+assert {
+  res.status: eq 200
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.result && body.result.id) {
+    bru.setVar("validatorTaskId", body.result.id);
+  }
+  if (body && body.result && body.result.taskId) {
+    bru.setVar("validatorTaskId", body.result.taskId);
+  }
+}

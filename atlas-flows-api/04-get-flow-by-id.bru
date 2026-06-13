@@ -1,0 +1,19 @@
+meta {
+  name: Get Flow By ID
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{baseUrl}}/flows/tenants/{{tenantId}}/flows/{{flowId}}
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+}
+
+assert {
+  res.status: eq 200
+}

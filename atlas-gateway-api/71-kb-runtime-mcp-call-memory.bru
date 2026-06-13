@@ -1,0 +1,40 @@
+meta {
+  name: KB Runtime MCP Call Memory
+  type: http
+  seq: 71
+}
+
+post {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/mcp
+  body: json
+}
+
+headers {
+  Authorization: Bearer {{userToken}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "jsonrpc": "2.0",
+    "id": "kb-memory-1",
+    "method": "tools/call",
+    "params": {
+      "name": "knowledge_memory",
+      "arguments": {
+        "tenant_id": "{{tenantId}}",
+        "content": "Customer asked about cancellation and auto-renew terms.",
+        "format": "plain",
+        "source_id": "chat-session-1",
+        "labels": {
+          "doctype": "chat",
+          "channel": "assistant"
+        }
+      }
+    }
+  }
+}
+
+assert {
+  res.status: eq 200
+}

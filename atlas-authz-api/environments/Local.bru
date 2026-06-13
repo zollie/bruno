@@ -1,0 +1,16 @@
+vars {
+  baseUrl: http://localhost:8080
+  tenantId: tenant-a
+  userId: user-123
+  adminUserId: admin-123
+  nonAdminUserId: user-456
+  toolName: sample_tool
+  agentResourceId: agent-a
+  crossTenantId: tenant-b
+  gatewayToolsResourceId: gateway.tools
+  token: replace-with-valid-jwt-when-authz-require-jwt-true
+}
+
+vars:secret [
+  token
+]

@@ -1,0 +1,53 @@
+meta {
+  name: Invoke Planner Agent
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{plannerAgentBaseUrl}}/invoke
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "jsonrpc": "2.0",
+    "id": "multi-agent-{{workflowRunId}}-planner-send",
+    "method": "message/send",
+    "params": {
+      "configuration": {
+        "blocking": false,
+        "acceptedOutputModes": ["text"]
+      },
+      "message": {
+        "messageId": "{{workflowRunId}}-planner-msg-1",
+        "role": "user",
+        "parts": [
+          {
+            "kind": "text",
+            "text": "You are a deterministic planner. Objective: {{workflowObjective}}. Respond with strict JSON only. Schema keys: agent, runId, plan, firstStep, expectedOutput."
+          }
+        ]
+      }
+    }
+  }
+}
+
+assert {
+  res.status: eq 200
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.result && body.result.id) {
+    bru.setVar("plannerTaskId", body.result.id);
+  }
+  if (body && body.result && body.result.taskId) {
+    bru.setVar("plannerTaskId", body.result.taskId);
+  }
+}

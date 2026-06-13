@@ -1,0 +1,33 @@
+meta {
+  name: Runtime MCP Tools Call
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/mcp
+  body: json
+}
+
+headers {
+  Authorization: Bearer {{userToken}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "jsonrpc": "2.0",
+    "id": "tools-call-1",
+    "method": "tools/call",
+    "params": {
+      "name": "{{toolName}}",
+      "arguments": {
+        "q": "hello from Bruno"
+      }
+    }
+  }
+}
+
+assert {
+  res.status: eq 200
+}

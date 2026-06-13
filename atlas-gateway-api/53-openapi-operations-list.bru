@@ -1,0 +1,18 @@
+meta {
+  name: OpenAPI Operations List
+  type: http
+  seq: 53
+}
+
+get {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/admin/openapi/{{openApiSpecId}}/operations
+  body: none
+}
+
+headers {
+  Authorization: Bearer {{adminToken}}
+}
+
+assert {
+  res.status: eq 200
+}

@@ -1,0 +1,19 @@
+meta {
+  name: List Flows
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/flows/tenants/{{tenantId}}/flows?limit=20
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+}
+
+assert {
+  res.status: eq 200
+}

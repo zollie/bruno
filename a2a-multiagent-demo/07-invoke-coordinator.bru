@@ -1,0 +1,53 @@
+meta {
+  name: Invoke Coordinator Agent
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{coordinatorAgentBaseUrl}}/invoke
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "jsonrpc": "2.0",
+    "id": "multi-agent-{{workflowRunId}}-coordinator-send",
+    "method": "message/send",
+    "params": {
+      "configuration": {
+        "blocking": false,
+        "acceptedOutputModes": ["text"]
+      },
+      "message": {
+        "messageId": "{{workflowRunId}}-coordinator-msg-1",
+        "role": "user",
+        "parts": [
+          {
+            "kind": "text",
+            "text": "You are a deterministic coordinator. Objective: {{workflowObjective}}. Respond with strict JSON only. Schema keys: agent, runId, status, assignedAgents, actionPlan."
+          }
+        ]
+      }
+    }
+  }
+}
+
+assert {
+  res.status: eq 200
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.result && body.result.id) {
+    bru.setVar("coordinatorTaskId", body.result.id);
+  }
+  if (body && body.result && body.result.taskId) {
+    bru.setVar("coordinatorTaskId", body.result.taskId);
+  }
+}

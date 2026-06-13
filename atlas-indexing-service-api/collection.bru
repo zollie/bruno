@@ -1,0 +1,14 @@
+docs {
+  # Atlas Indexing Service API
+
+  This collection targets the standalone indexing service (`/v1/index`).
+
+  Notes:
+  - Uses service-level `tenant_id` in request body.
+  - This service does not use JWT bearer auth.
+  - If the service is configured with `INDEXING_SERVICE__API_KEY`, send `X-API-Key`.
+}
+
+vars {
+  baseUrl: http://localhost:8081
+}

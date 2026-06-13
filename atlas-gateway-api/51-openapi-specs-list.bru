@@ -1,0 +1,18 @@
+meta {
+  name: OpenAPI Specs List
+  type: http
+  seq: 51
+}
+
+get {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/admin/openapi/specs
+  body: none
+}
+
+headers {
+  Authorization: Bearer {{adminToken}}
+}
+
+assert {
+  res.status: eq 200
+}

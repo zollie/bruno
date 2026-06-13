@@ -1,0 +1,50 @@
+meta {
+  name: Create Flow (gdrive sourceType no Id)
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{baseUrl}}/flows/tenants/{{tenantId}}/flows
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "sourceType": "gdrive",
+    "source": {
+      "folderId": "{{gdriveFolderId}}",
+      "serviceAccount": {{serviceAccount}}
+    }
+  }
+  
+}
+
+assert {
+  res.status: eq 201
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.flowId) {
+    bru.setVar("flowId", body.flowId);
+  }
+}
+
+tests {
+  test("response contains tenant from JWT", function() {
+    const body = res.getBody();
+    expect(body.tenantId).to.equal(bru.getVar("tenantId"));
+  });
+  
+  test("response contains generated flowId", function() {
+    const body = res.getBody();
+    expect(body.flowId).to.not.equal(null);
+  });
+}

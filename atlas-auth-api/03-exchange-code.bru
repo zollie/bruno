@@ -1,0 +1,39 @@
+meta {
+  name: Exchange Code
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/auth/exchange
+  body: json
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "code": "{{code}}",
+    "redirect_uri": "{{redirectUri}}",
+    "code_verifier": "{{codeVerifier}}"
+  }
+}
+
+assert {
+  res.status: eq 200
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (body && body.access_token) {
+    bru.setVar("token", body.access_token);
+  }
+  if (body && body.id_token) {
+    bru.setVar("idToken", body.id_token);
+  }
+  if (body && body.refresh_token) {
+    bru.setVar("refreshToken", body.refresh_token);
+  }
+}

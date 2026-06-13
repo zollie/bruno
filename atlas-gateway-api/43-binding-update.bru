@@ -1,0 +1,29 @@
+meta {
+  name: Binding Update
+  type: http
+  seq: 43
+}
+
+put {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/admin/bindings/{{bindingId}}
+  body: json
+}
+
+headers {
+  Authorization: Bearer {{adminToken}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "tool_name": "{{toolName}}",
+    "target_id": "{{targetId}}",
+    "downstream_tool": "{{toolName}}",
+    "openapi_spec_id": "",
+    "operation_id": ""
+  }
+}
+
+assert {
+  res.status: eq 200
+}

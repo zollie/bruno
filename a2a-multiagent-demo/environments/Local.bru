@@ -1,0 +1,22 @@
+vars {
+  registryBaseUrl: http://localhost:8080
+  token: replace-with-jwt
+  coordinatorAgentBaseUrl: http://localhost:8081
+  plannerAgentBaseUrl: http://localhost:8082
+  validatorAgentBaseUrl: http://localhost:8083
+  workflowRunId: run-2026-06-02-a
+  workflowObjective: Run a deterministic triage workflow for issue ACME-123 and return strict JSON payloads
+  coordinatorCardUrl: http://localhost:8081/.well-known/agent-card.json
+  plannerCardUrl: http://localhost:8082/.well-known/agent-card.json
+  validatorCardUrl: http://localhost:8083/.well-known/agent-card.json
+  coordinatorAgentRegistryId: replace-after-publish
+  plannerAgentRegistryId: replace-after-publish
+  validatorAgentRegistryId: replace-after-publish
+  coordinatorTaskId: replace-after-invoke
+  plannerTaskId: replace-after-invoke
+  validatorTaskId: replace-after-invoke
+}
+
+vars:secret [
+  token
+]

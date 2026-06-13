@@ -1,0 +1,18 @@
+meta {
+  name: KB Verify Memory Tool
+  type: http
+  seq: 69
+}
+
+get {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/tools/{{kbMemoryToolId}}
+  body: none
+}
+
+headers {
+  Authorization: Bearer {{adminToken}}
+}
+
+assert {
+  res.status: eq 200
+}

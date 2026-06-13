@@ -1,0 +1,38 @@
+meta {
+  name: KB Runtime MCP Call KnowledgeBase
+  type: http
+  seq: 72
+}
+
+post {
+  url: {{baseUrl}}/gateway/tenants/{{tenantId}}/mcp
+  body: json
+}
+
+headers {
+  Authorization: Bearer {{userToken}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "jsonrpc": "2.0",
+    "id": "kb-call-1",
+    "method": "tools/call",
+    "params": {
+      "name": "{{kbKnowledgeToolName}}",
+      "arguments": {
+        "query": "What knowledge is available for this tenant?",
+        "strategy": {
+          "family": "lexical",
+          "kind": "auto",
+          "profile": "fast"
+        }
+      }
+    }
+  }
+}
+
+assert {
+  res.status: eq 200
+}
