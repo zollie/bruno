@@ -1,0 +1,32 @@
+meta {
+  name: Upload File
+  type: http
+  seq: 18
+}
+
+post {
+  url: {{baseUrl}}/flows/tenants/{{tenantId}}/uploads
+  body: multipartForm
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{token}}
+}
+
+body:multipart-form {
+  file: @file({{uploadFilePath}})
+}
+
+assert {
+  res.status: eq 201
+}
+
+tests {
+  test("response contains uploaded object location", function() {
+    const body = res.getBody();
+    expect(body.bucket).to.not.equal(null);
+    expect(body.key).to.not.equal(null);
+    expect(body.s3Uri).to.not.equal(null);
+  });
+}

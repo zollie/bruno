@@ -16,6 +16,7 @@ Collection root: `docs/bruno/atlas-flows-api`
 10. `Create Flow (no Id).bru` - `POST /flows/tenants/{{tenantId}}/flows` (gdrive source-type payload example)
 11. `13-upload-to-s3.bru` - `POST /flows/tenants/{{tenantId}}/uploads` (context-catalog entry upload to managed S3)
 12. `14-delete-all-flows.bru` - `DELETE /flows/tenants/{{tenantId}}/flows`
+13. `15-upload-file.bru` - `POST /flows/tenants/{{tenantId}}/uploads` (multipart file upload)
 
 ## Variables
 
@@ -26,7 +27,7 @@ Environment file: `environments/Local.bru`
 - `token` - bearer JWT (must include `tenant_id` and `vertical`; `tenant_id` must match `tenantId`)
 - `flowId` - populated after create request
 - `executionId` - populated after trigger/execute request
-- `uploadFilePath` - local file path used by context-catalog upload request (`13-upload-to-s3.bru`)
+- `uploadFilePath` - local file path used by upload requests
 
 ## Source Format
 
