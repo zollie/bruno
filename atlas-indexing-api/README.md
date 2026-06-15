@@ -25,7 +25,8 @@ Environment file: `environments/Local.bru`
 ## Auth Notes
 
 - Indexing middleware extracts `tenant_id` from JWT payload.
-- Path tenant must match JWT tenant or requests return `403`.
+- Path tenant must match JWT tenant, or the JWT must contain `tenants: ["*"]`.
+- The path tenant still must be onboarded.
 
 ## Import into Bruno
 

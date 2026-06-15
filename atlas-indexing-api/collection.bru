@@ -4,7 +4,7 @@ docs {
   This collection targets the Atlas `/indexing` module.
 
   Notes:
-  - Tenant in path must match JWT `tenant_id` claim.
+  - Tenant in path must match the JWT tenant claim, or the JWT must contain `tenants: ["*"]`.
   - `02-create-ingestion` stores returned `jobId` for later requests.
   - Stop route is included: `08-stop-ingestions` (`POST /indexing/tenants/{{tenantId}}/ingestions/stop`).
   - Cleanup route is included: `07-delete-all-ingestions` (`DELETE /indexing/tenants/{{tenantId}}/ingestions`).
