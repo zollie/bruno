@@ -1,15 +1,16 @@
 docs {
-  # Atlas Indexing Service API (Standalone Only)
+  # Atlas Indexing API
 
-  This collection targets the standalone indexing service (`/v1/index`).
-  Do not use it for Atlas `api-blue`; use the `Atlas Indexing API` collection instead.
+  This collection targets the Atlas `/indexing` module.
 
   Notes:
-  - Uses service-level `tenant_id` in request body.
-  - This service does not use JWT bearer auth.
-  - If the service is configured with `INDEXING_SERVICE__API_KEY`, send `X-API-Key`.
+  - Tenant in path must match the JWT tenant claim, or the JWT must contain `tenants: ["*"]`.
+  - Create ingestion stores returned `jobId` for later requests.
 }
 
 vars {
-  baseUrl: http://localhost:8081
+  baseUrl: http://localhost:8080
+  tenantId: replace-with-onboarded-tenant-id
+  token: replace-with-atlas-context-jwt
+  jobId: replace-after-create
 }

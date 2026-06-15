@@ -1,11 +1,11 @@
 meta {
-  name: Create Ingestion Public
+  name: Create Ingestion
   type: http
   seq: 8
 }
 
 post {
-  url: {{baseUrl}}/indexing/tenants/public/ingestions
+  url: {{baseUrl}}/indexing/tenants/{{tenantId}}/ingestions
   body: json
   auth: none
 }

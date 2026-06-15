@@ -19,13 +19,12 @@ Environment file: `environments/Local.bru`
 
 - `baseUrl` - Atlas base URL (default `http://localhost:8080`)
 - `tenantId` - tenant id in route path
-- `token` - bearer token containing `tenant_id` claim matching `tenantId`
+- `token` - Atlas context JWT allowed to access `tenantId`
 - `jobId` - populated by create request
 
 ## Auth Notes
 
-- Indexing middleware extracts `tenant_id` from JWT payload.
-- Path tenant must match JWT tenant, or the JWT must contain `tenants: ["*"]`.
+- Path tenant must be allowed by the JWT, including wildcard tenant access via `tenants: ["*"]`.
 - The path tenant still must be onboarded.
 
 ## Import into Bruno
