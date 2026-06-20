@@ -5,23 +5,23 @@ meta {
 }
 
 post {
-  url: {{baseUrl}}/auth/api/users
+  url: https://api-blue.us-east-1.atlas.nonprod.aws.janeisis.com/auth/api/users
   body: json
   auth: none
 }
 
 headers {
-  Authorization: Bearer {{token}}
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImFwaS1rZXktaHMyNTYifQ.eyJpc3MiOiJodHRwczovL2FwaS1nYXRld2F5LnVzLWVhc3QtMS5hdGxhcy5ub25wcm9kLmF3cy5qYW5laXNpcy5jb20iLCJhdWQiOiJib29raW5mbyIsImFwaV9rZXkiOiJqQVRDdGw5SjNGZVdhei10eXM5a1ZBN0d6WjNQcFBBTlVrSlBlYUYxVTRNIiwidGVuYW50X2lkIjoiKiIsInRlbmFudHMiOlsiKiJdLCJyb2xlcyI6WyJhdGxhc19hZG1pbiJdLCJzdWIiOiJ6b2xsaWVAamFuZWlzaXMuY29tIiwiZW1haWwiOiJ6b2xsaWVAamFuZWlzaXMuY29tIiwib3JnIjoiZ3JhcGhyYWciLCJpYXQiOjE3ODE4NDUxOTUsIm5iZiI6MTc4MTg0NTE2NSwiZXhwIjoxNzgxODczOTk1fQ.j-Q2r9ainAIh35tjP-xEu80f_eGKWLnRJFDdOijUGEQ
   Content-Type: application/json
 }
 
 body:json {
   {
-    "email": "admin-a@example.test",
-    "firstName": "Admin",
-    "lastName": "A",
-    "displayName": "Admin A",
-    "org": "org-a",
+    "email": "zollie@janeisis.com  ",
+    "firstName": "Zollie",
+    "lastName": "Badass",
+    "displayName": "Bad Motherfucker",
+    "org": "atlas",
     "tenants": ["*"],
     "roles": ["atlas_admin"],
     "departments": ["platform"],

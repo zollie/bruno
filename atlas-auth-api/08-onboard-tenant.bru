@@ -5,20 +5,20 @@ meta {
 }
 
 post {
-  url: {{baseUrl}}/auth/api/tenants/onboard
+  url: https://api-blue.us-east-1.atlas.nonprod.aws.janeisis.com/auth/api/tenants/onboard
   body: json
   auth: none
 }
 
 headers {
   Content-Type: application/json
-  Authorization: Bearer {{token}}
+  Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImF0bGFzLXJzMjU2LXNoYXJlZC1ibHVlLTEiLCJ0eXAiOiJKV1QifQ.eyJhdGxhc191c2VyX2lkIjoiYWJjNTg4NjYtYzdjOC00NTZkLWJjNDQtZGJkZmM3MTM2YWE2IiwiYXVkIjoiYXRsYXMtYmFja2VuZCIsImRlcGFydG1lbnRzIjpbInBsYXRmb3JtIl0sImVtYWlsIjoiem9sbGllQGphbmVpc2lzLmNvbSIsImV4cCI6MTc4MTkzNTQyNCwiZmFtaWx5X25hbWUiOiJCYWRhc3MiLCJnaXZlbl9uYW1lIjoiWm9sbGllIiwiaWF0IjoxNzgxODQ5MDI0LCJpc3MiOiJodHRwczovL21hbmFnZW1lbnQtYmx1ZS51cy1lYXN0LTEuYXRsYXMubm9ucHJvZC5hd3MuamFuZWlzaXMuY29tL2F1dGgiLCJrZXljbG9ha19zdWIiOiIwMjliYmQyYi02MTBkLTRmZDQtODlhMS03M2Q4YmI2MGUyNjAiLCJuYW1lIjoiQmFkIE1vdGhlcmZ1Y2tlciIsIm5iZiI6MTc4MTg0OTAyNCwib3JnIjoiYXRsYXMiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ6b2xsaWVAamFuZWlzaXMuY29tIiwicHJpbmNpcGFsX3R5cGUiOiJ1c2VyIiwicm9sZXMiOlsiYXRsYXNfYWRtaW4iXSwic3ViIjoiYWJjNTg4NjYtYzdjOC00NTZkLWJjNDQtZGJkZmM3MTM2YWE2IiwidGVuYW50cyI6WyIqIl0sInRva2VuX3R5cGUiOiJhdGxhc19jb250ZXh0In0.v13xg7RE7_oNrzWQu4jL_NmuoMXrJPQwvKLXa2d72u_DNgl-vqLQDyRXlBDux86WnsIboxZPvuDdYntQsSlJXRoFo5hGrD078v5FWLOjnkgkZtuoTN-M_7bynDVUhp3-T0SIKPctkMCe60AlfxYEdOyl3lZrS8HRlCLSQboemZiXKL5_fyFcn5j5lsuSFxYwse5i6WmS4MEnlPUQEYqTdU_HfbX4vJ1qaEMVuZjWa_WI3fhD-FNYoakT2h7tTYpJACHse85iGmZ4T2bfKY3eBqs9HdgtdB7ke91GviKKuUhT_SpWnoRUWeK7L1hZq6sSZVn3oN3RYVhcmV8ioPdfzA
 }
 
 body:json {
   {
-    "tenantName": "{{tenantName}}",
-    "tenantId": "{{tenantId}}"
+    "tenantName": "zollie",
+    "tenantId": "z-source-code"
   }
 }
 

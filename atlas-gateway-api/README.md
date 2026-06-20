@@ -91,7 +91,7 @@ For OpenAPI admin coverage:
 
 ## Sandbox Blue
 
-Use `environments/Sandbox Blue.bru`. Its `baseUrl` is `https://api-blue.us-east-1.sandbox.avidaws.com`.
+Use `environments/Sandbox Blue.bru`. Its `baseUrl` is `https://api-blue.us-east-1.sandbox.aws.janeisis.com`.
 
 ## Import into Bruno
 
